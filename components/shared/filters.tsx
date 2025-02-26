@@ -31,7 +31,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
          <CheckboxFiltersGroup
             className="mt-5"
             title="Ингредиенты:"
-            limit={6}
+            limit={2}
             defaultItems={[
                {
                   text: 'Сырный соус',
@@ -41,48 +41,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
                   text: 'Моццарелла',
                   value: '2',
                },
-               {
-                  text: 'Чеснок',
-                  value: '3',
-               },
-               {
-                  text: 'Солённые огурчики',
-                  value: '4',
-               },
-               {
-                  text: 'Красный лук',
-                  value: '5',
-               },
-               {
-                  text: 'Томаты',
-                  value: '6',
-               },
             ]}
             items={[
-               {
-                  text: 'Сырный соус',
-                  value: '1',
-               },
-               {
-                  text: 'Моццарелла',
-                  value: '2',
-               },
-               {
-                  text: 'Чеснок',
-                  value: '3',
-               },
-               {
-                  text: 'Солённые огурчики',
-                  value: '4',
-               },
-               {
-                  text: 'Красный лук',
-                  value: '5',
-               },
-               {
-                  text: 'Томаты',
-                  value: '6',
-               },
                {
                   text: 'Сырный соус',
                   value: '1',
