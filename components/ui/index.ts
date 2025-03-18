@@ -7,3 +7,4 @@ export { Popover } from './popover';
 export { Select } from './select';
 export { Skeleton } from './skeleton';
 export { RangeSlider } from './range-slider';
+export { RepeatContent } from './repeat-content';

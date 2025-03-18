@@ -15,7 +15,7 @@ interface Props {
    className?: string;
 }
 
-export const ProductCard: React.FC<Props> = ({ name, price=0, count, imageUrl, className }) => {
+export const ProductCard: React.FC<Props> = ({ name, price = 0, count, imageUrl, className }) => {
    return (
       <div className={cn(className)}>
          <Link href="/product/1">
