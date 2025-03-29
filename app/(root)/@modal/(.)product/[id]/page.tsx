@@ -3,15 +3,13 @@ import { ChooseProductModal } from '@/shared/components/shared';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
-interface ProductPageProps {
-   params: {
-      id: string;
-   };
-}
+async function ProductModal({ params }: { params: Promise<{ id: string }> }) {
+   const { id: productId } = await params;
 
-const ProductModal = async ({ params }: ProductPageProps) => {
    const product = await prisma.product.findFirst({
-      where: { id: Number(params.id) },
+      where: {
+         id: Number(productId),
+      },
       include: {
          ingredients: true,
          variants: true,
@@ -23,6 +21,6 @@ const ProductModal = async ({ params }: ProductPageProps) => {
    }
 
    return <ChooseProductModal product={product} />;
-};
+}
 
 export default ProductModal;

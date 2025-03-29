@@ -1,46 +1,36 @@
 'use client';
 
 import React from 'react';
-import { cn } from '@/shared/lib/utils';
-import { useRouter } from 'next/navigation';
 import { ChooseProductForm } from '../choose-product-form';
 import { ProductWithRelations } from '@/@types/prisma';
-import { Dialog } from '../../ui';
-import { DialogContent, DialogTitle } from '../../ui/dialog';
 import { useCartStore } from '@/shared/store/cart';
+import toast from 'react-hot-toast';
 
 interface Props {
    product: ProductWithRelations;
-   className?: string;
+   onSubmit?: VoidFunction;
 }
 
-export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
-   const router = useRouter();
+export const ChooseProductModal: React.FC<Props> = ({ product, onSubmit }) => {
    const firstItem = product.variants[0];
    const isPizzaForm = Boolean(firstItem.pizzaType);
-   const addCartItem = useCartStore(state => state.addCartItem);
+   const { addCartItem, loading } = useCartStore(state => state);
 
-   const onClickAddCart = (productItemId?: number, ingredients?: number[]) => {
-      if (isPizzaForm) {
-         if (productItemId && ingredients) {
-            addCartItem({
-               productItemId,
-               ingredients,
-            });
-         }
-      } else {
-         addCartItem({
-            productItemId: firstItem.id,
+   const onClickAddCart = async (productItemId?: number, ingredients?: number[]) => {
+      try {
+         const itemId = productItemId ?? firstItem.id;
+         await addCartItem({
+            productItemId: itemId,
+            ingredients,
          });
+         toast.success(`${isPizzaForm ? `Пицца ${product.name}` : `${product.name}`} добавлен в корзину`);
+      } catch (error) {
+         toast.error(`Не удалось добавить ${isPizzaForm ? `пиццу ${product.name}` : `${product.name}`} в корзину`);
+         console.log(error);
+      } finally {
+         onSubmit?.();
       }
    };
 
-   return (
-      <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
-         <DialogContent className={cn('p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden', className)}>
-            <DialogTitle className="visually-hidden">{product.name}</DialogTitle>
-            <ChooseProductForm {...product} onSubmit={onClickAddCart} variant={isPizzaForm ? 'pizza' : 'default'} />
-         </DialogContent>
-      </Dialog>
-   );
+   return <ChooseProductForm {...product} onSubmit={onClickAddCart} loading={loading} variant={isPizzaForm ? 'pizza' : 'default'} />;
 };

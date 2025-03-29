@@ -2,9 +2,10 @@ import { prisma } from '@/prisma/prisma-client';
 import { updateCartTotalAmount } from '@/shared/lib/update-cart-total-amount';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
    try {
-      const id = Number(params.id);
+      const { id: productId } = await params;
+
       const data = (await req.json()) as { quantity: number };
       const token = req.cookies.get('cartToken')?.value;
 
@@ -14,7 +15,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
       const cartItem = await prisma.cartItem.findFirst({
          where: {
-            id,
+            id: Number(productId),
          },
       });
 
@@ -24,7 +25,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
       await prisma.cartItem.update({
          where: {
-            id,
+            id: Number(productId),
          },
          data: {
             quantity: data.quantity,
@@ -40,9 +41,10 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
    }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
    try {
-      const id = Number(params.id);
+      const { id: productId } = await params;
+
       const token = req.cookies.get('cartToken')?.value;
 
       if (!token) {
@@ -51,7 +53,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
 
       const cartItem = await prisma.cartItem.findFirst({
          where: {
-            id: Number(params.id),
+            id: Number(productId),
          },
       });
 
@@ -61,7 +63,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
 
       await prisma.cartItem.delete({
          where: {
-            id: Number(params.id),
+            id: Number(productId),
          },
       });
 

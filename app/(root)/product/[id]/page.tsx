@@ -4,26 +4,15 @@ import { GroupVariants } from '@/shared/components/shared/group-variants';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
-interface ProductPageProps {
-   params: {
-      id: string;
-   };
-}
+async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+   const { id: productId } = await params;
 
-const ProductPage = async ({ params }: ProductPageProps) => {
    const product = await prisma.product.findFirst({
-      where: { id: Number(params.id) },
+      where: {
+         id: Number(productId),
+      },
       include: {
          ingredients: true,
-         category: {
-            include: {
-               products: {
-                  include: {
-                     variants: true,
-                  },
-               },
-            },
-         },
          variants: true,
       },
    });
@@ -61,6 +50,6 @@ const ProductPage = async ({ params }: ProductPageProps) => {
          </div>
       </Container>
    );
-};
+}
 
 export default ProductPage;

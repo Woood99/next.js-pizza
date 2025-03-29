@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
          await prisma.cartItem.create({
             data: {
                cartId: userCart.id,
-               productItemId: data.productItemId,
+               productItemId: data.productItemId as number,
                quantity: 1,
                ingredients: { connect: data.ingredients?.map(id => ({ id })) },
             },
