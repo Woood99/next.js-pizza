@@ -38,7 +38,7 @@ export const SearchInput = () => {
    return (
       <>
          {focused && <div className="fixed inset-0 bg-black/50 z-30" />}
-         <div ref={searchRef} className="flex rounded-2xl flex-1 justify-between h-11 relative z-40">
+         <div ref={searchRef} className="flex rounded-2xl flex-1 justify-between h-11 relative z-30">
             <Search className="absolute top-1/2 translate-y-[-50%] left-3 h-5 text-gray-400" />
             <input
                className="rounded-2xl outline-none w-full bg-gray-100 pl-11"

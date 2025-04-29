@@ -7,9 +7,9 @@ import { Title } from './title';
 import { CountButton } from './count-button';
 import { Button, Dialog } from '../ui';
 import { getCartItemDetails } from '@/shared/lib/get-cart-item-details';
-import { ChooseProductModal } from './modals';
 import { DialogContent, DialogTitle } from '../ui/dialog';
 import { ProductWithRelations } from '@/@types/prisma';
+import { ChooseProduct } from './choose-product';
 
 interface Props {
    className?: string;
@@ -50,7 +50,7 @@ export const ProductCard: React.FC<Props> = ({ data, className }) => {
          <Dialog open={openModal} onOpenChange={() => setOpenModal(false)}>
             <DialogContent className={cn('p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden')}>
                <DialogTitle className="visually-hidden">{data.name}</DialogTitle>
-               <ChooseProductModal product={data} onSubmit={() => setOpenModal(false)} />;
+               <ChooseProduct product={data} onSubmit={() => setOpenModal(false)} />;
             </DialogContent>
          </Dialog>
       </>

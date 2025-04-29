@@ -1,7 +1,5 @@
 import { prisma } from '@/prisma/prisma-client';
-import { ChooseProductModal } from '@/shared/components/shared';
 import { notFound } from 'next/navigation';
-import React from 'react';
 
 async function ProductModal({ params }: { params: Promise<{ id: string }> }) {
    const { id: productId } = await params;
@@ -20,7 +18,7 @@ async function ProductModal({ params }: { params: Promise<{ id: string }> }) {
       return notFound();
    }
 
-   return <ChooseProductModal product={product} />;
+   return 123;
 }
 
 export default ProductModal;

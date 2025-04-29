@@ -37,9 +37,9 @@ export const ChooseProductForm: React.FC<Props> = ({ className, name, variants, 
 
    return (
       <div className={cn('flex flex-1', className)}>
-         <ProductImage imageUrl={imageUrl} size={size} variant={variant} />
+         <ProductImage className="flex-1" imageUrl={imageUrl} size={size} variant={variant} />
 
-         <div className="flex-grow p-8 flex flex-col">
+         <div className="flex-grow p-8 flex flex-col max-w-[470px]">
             <Title text={name} size="md" className="font-extrabold mb-1" />
             {isPizza && (
                <>
@@ -70,5 +70,5 @@ export const ChooseProductForm: React.FC<Props> = ({ className, name, variants, 
             </Button>
          </div>
       </div>
-   );
+   )
 };

@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { ChooseProductForm } from '../choose-product-form';
-import { ProductWithRelations } from '@/@types/prisma';
+import { ChooseProductForm } from './choose-product-form';
 import { useCartStore } from '@/shared/store/cart';
+import { ProductWithRelations } from '@/@types/prisma';
 import toast from 'react-hot-toast';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
    onSubmit?: VoidFunction;
 }
 
-export const ChooseProductModal: React.FC<Props> = ({ product, onSubmit }) => {
+export const ChooseProduct: React.FC<Props> = ({ product, onSubmit }) => {
    const firstItem = product.variants[0];
    const isPizzaForm = Boolean(firstItem.pizzaType);
    const { addCartItem, loading } = useCartStore(state => state);

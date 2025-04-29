@@ -112,3 +112,15 @@ html {
    height: 1px;
    clip: rect(0 0 0 0);
 }
+
+#nprogress .bar {
+   @apply bg-primary;
+}
+
+#nprogress .peg {
+   @apply shadow-md shadow-primary;
+}
+
+#nprogress .spinner-icon {
+   @apply border-t-primary border-l-primary;
+}

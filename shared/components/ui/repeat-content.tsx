@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface Props {
-   count: number;
+   count?: number;
 }
 
 export const RepeatContent: React.FC<React.PropsWithChildren<Props>> = ({ count = 0, children }) => {
@@ -9,4 +9,3 @@ export const RepeatContent: React.FC<React.PropsWithChildren<Props>> = ({ count 
       return <React.Fragment key={index}>{children}</React.Fragment>;
    });
 };
-
