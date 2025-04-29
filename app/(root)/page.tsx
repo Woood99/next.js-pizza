@@ -1,10 +1,10 @@
 import { Container, Filters, ProductsGroupList, SortPopup, Title } from '@/shared/components/shared';
 import { Categories } from '@/shared/components/shared/categories';
 import { Stories } from '@/shared/components/shared/stories';
-import { findPizzas, GetSearchParams } from '@/shared/lib/find-pizzas';
+import { findPizzas } from '@/shared/lib/find-pizzas';
 import { Suspense } from 'react';
 
-const Home = async ({ searchParams }: { searchParams: GetSearchParams }) => {
+const Home = async ({ searchParams }: { searchParams: any }) => {
    const categories = await findPizzas(searchParams);
 
    return (

@@ -1,12 +1,12 @@
 import { prisma } from '@/prisma/prisma-client';
+import { authOptions } from '@/shared/constants/authOptions';
 import { getServerSession } from 'next-auth/next';
 import { NextResponse } from 'next/server';
-import { authOptions } from '../[...nextauth]/route';
 
 export async function GET() {
    try {
       const user = await getServerSession(authOptions);
-      
+
       if (!user) {
          return NextResponse.json({ message: 'Вы не авторизованы' }, { status: 401 });
       }
